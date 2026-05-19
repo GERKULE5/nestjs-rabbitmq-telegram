@@ -1,7 +1,7 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { NotificationDTO, SendNotificationDto } from '../dto/notification.dto';
-import { NotificationMessage } from '../interfaces/notification-message.interface';
+import { NotificationMessage } from '../../common/interfaces/notification-message.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { catchError, lastValueFrom, throwError, timeout } from 'rxjs';
 
