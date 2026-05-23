@@ -12,19 +12,13 @@ export class ConsumerController {
   @EventPattern('notification.created')
   async handleNotification(
     @Payload() message: NotificationMessage,
-    @Ctx() context: RmqContext,
   ): Promise<void> {
-    const channel = context.getChannelRef();
-    const rawMessage = context.getMessage();
-
     try {
       await this.service.processNotification(message);
-      channel.ack(rawMessage);
     } catch (error) {
       this.logger.error(
         `Message nacked [id=${message.id}]: ${(error as Error).message}`,
       );
-      channel.nack(rawMessage, false, false);
     }
   }
 }

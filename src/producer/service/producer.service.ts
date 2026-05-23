@@ -20,16 +20,7 @@ export class ProducerService {
       timestamp: new Date(),
     };
 
-    await lastValueFrom(
-      this.client.emit('notification.created', message).pipe(
-        timeout(5000),
-        catchError((error: Error) =>
-          throwError(
-            () => new Error(`Failed to send message: ${error.message}`),
-          ),
-        ),
-      ),
-    );
+    this.client.emit('notification.created', message)
 
     this.logger.log(`Message sent [id=${message.id}]`);
     return { success: true, messageId: message.id };
