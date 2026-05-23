@@ -1,6 +1,6 @@
 import { Controller, Logger } from '@nestjs/common';
 import { ConsumerService } from '../service/consumer.service';
-import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
+import { EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import type { NotificationMessage } from '../../common/interfaces/notification-message.interface';
 
 @Controller()

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConsumerController } from './controller/consumer.controller';
 import { ConsumerService } from './service/consumer.service';
-import { TelegramService } from '../telegram/service/telegram.service';
 import { TelegramModule } from '../telegram/telegram.module';
 
 @Module({
