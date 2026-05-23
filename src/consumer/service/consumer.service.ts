@@ -1,14 +1,24 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { NotificationMessage } from '../../common/interfaces/notification-message.interface';
+import { TelegramService } from '../../telegram/service/telegram.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ConsumerService {
   private readonly logger = new Logger(ConsumerService.name);
 
+  constructor(
+    private readonly telegramService: TelegramService,
+    private readonly configService: ConfigService,
+  ) {}
+
   async processNotification(message: NotificationMessage): Promise<void> {
     this.logger.log(`Processing message [id=${message.id}]`);
+    const chatId = this.configService.getOrThrow<string>('TELEGRAM_CHAT_ID');
+    const text = `❗ Новое сообщение ❗\n\nID: ${message.id}\nMessage: ${JSON.stringify(message.payload)}\nTime: ${message.timestamp}`;
 
     try {
+      await this.telegramService.sendMessage(chatId, text);
       this.logger.log(`Message processed successfully [id=${message.id}]`);
     } catch (error) {
       this.logger.error(
