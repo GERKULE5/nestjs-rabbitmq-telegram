@@ -15,7 +15,7 @@ export class ConsumerService {
   async processNotification(message: NotificationMessage): Promise<void> {
     this.logger.log(`Processing message [id=${message.id}]`);
     const chatId = this.configService.getOrThrow<string>('TELEGRAM_CHAT_ID');
-    const text = `❗ Новое сообщение ❗\n\nID: ${message.id}\nMessage: ${JSON.stringify(message.payload)}\nTime: ${message.timestamp}`;
+    const text = `❗ Новое сообщение ❗\n\nID: ${message.id}\nMessage: ${message.payload}\nTime: ${message.timestamp}`;
 
     try {
       await this.telegramService.sendMessage(chatId, text);

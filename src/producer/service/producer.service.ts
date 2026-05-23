@@ -16,7 +16,7 @@ export class ProducerService {
   async sendNotification(dto: SendNotificationDto): Promise<NotificationDTO> {
     const message: NotificationMessage = {
       id: uuidv4(),
-      payload: { ...dto },
+      payload: dto.message,
       timestamp: new Date(),
     };
 

@@ -1,5 +1,5 @@
 export interface NotificationMessage {
   id: string;
-  payload: Record<string, unknown>;
+  payload: string;
   timestamp: Date;
 }
