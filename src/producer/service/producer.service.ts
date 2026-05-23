@@ -3,7 +3,6 @@ import { ClientProxy } from '@nestjs/microservices';
 import { NotificationDTO, SendNotificationDto } from '../dto/notification.dto';
 import { NotificationMessage } from '../../common/interfaces/notification-message.interface';
 import { v4 as uuidv4 } from 'uuid';
-import { catchError, lastValueFrom, throwError, timeout } from 'rxjs';
 
 @Injectable()
 export class ProducerService {
@@ -20,7 +19,7 @@ export class ProducerService {
       timestamp: new Date(),
     };
 
-    this.client.emit('notification.created', message)
+    this.client.emit('notification.created', message);
 
     this.logger.log(`Message sent [id=${message.id}]`);
     return { success: true, messageId: message.id };
