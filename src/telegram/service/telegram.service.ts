@@ -23,7 +23,7 @@ export class TelegramService implements OnModuleInit {
     this.logger.log('Telegram bot initialized');
   }
 
-  async sendMessage(chatId: string, message: string): Promise<void> {
+  async sendMessage(chatId: number, message: string): Promise<void> {
     try {
       await this.bot.telegram.sendMessage(chatId, message);
       this.logger.log(`Message sent to chat [id=${chatId}]`);

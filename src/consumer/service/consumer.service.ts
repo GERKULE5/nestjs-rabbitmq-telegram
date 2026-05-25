@@ -9,16 +9,14 @@ export class ConsumerService {
 
   constructor(
     private readonly telegramService: TelegramService,
-    private readonly configService: ConfigService,
   ) {}
 
   async processNotification(message: NotificationMessage): Promise<void> {
     this.logger.log(`Processing message [id=${message.id}]`);
-    const chatId = this.configService.getOrThrow<string>('TELEGRAM_CHAT_ID');
     const text = `❗ Новое сообщение ❗\n\nID: ${message.id}\nMessage: ${message.payload}\nTime: ${message.timestamp}`;
 
     try {
-      await this.telegramService.sendMessage(chatId, text);
+      await this.telegramService.sendMessage(message.chatId, text);
       this.logger.log(`Message processed successfully [id=${message.id}]`);
     } catch (error) {
       this.logger.error(

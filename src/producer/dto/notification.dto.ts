@@ -1,8 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class SendNotificationDto {
-  @ApiProperty({ example: 'Новое сообщение с помощью RabbitMQ!' })
+  @ApiProperty({
+    description: 'ID чата, в который нужно отправить сообщение',
+    example: 1234567890,
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  chatId!: number;
+
+  @ApiProperty({
+    description: 'Текст сообщения для отправки',
+    example: 'Новое сообщение с помощью RabbitMQ!',
+  })
   @IsString()
   @IsNotEmpty()
   message!: string;

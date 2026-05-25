@@ -17,12 +17,6 @@ describe('ConsumerService', () => {
             sendMessage: jest.fn().mockResolvedValue(undefined),
           },
         },
-        {
-          provide: ConfigService,
-          useValue: {
-            getOrThrow: jest.fn().mockReturnValue('123456789'),
-          },
-        },
       ],
     }).compile();
 
@@ -37,6 +31,7 @@ describe('ConsumerService', () => {
   it('should call telegramService.sendMessage with correct chatId and text', async () => {
     const message = {
       id: 'test-id',
+      chatId: 1234567890,
       payload: 'Test message',
       timestamp: new Date(),
     };
@@ -44,7 +39,7 @@ describe('ConsumerService', () => {
     await service.processNotification(message);
 
     expect(telegramService.sendMessage).toHaveBeenCalledWith(
-      '123456789',
+      1234567890,
       expect.stringContaining('test-id'),
     );
   });
@@ -54,6 +49,7 @@ describe('ConsumerService', () => {
 
     const message = {
       id: 'test-id',
+      chatId: 1234567890,
       payload: 'Test message',
       timestamp: new Date(),
     };
