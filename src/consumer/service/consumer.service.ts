@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { NotificationMessage } from '../../common/interfaces/notification-message.interface';
 import { TelegramService } from '../../telegram/service/telegram.service';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ConsumerService {
