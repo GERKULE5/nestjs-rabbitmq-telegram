@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConsumerService } from './consumer.service';
 import { TelegramService } from '../../telegram/service/telegram.service';
-import { ConfigService } from '@nestjs/config';
 
 describe('ConsumerService', () => {
   let service: ConsumerService;
